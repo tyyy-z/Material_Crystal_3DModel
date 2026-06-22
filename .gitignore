@@ -15,3 +15,4 @@ dev-server.*.log
 Thumbs.db
 ct-viewer-*.png
 main-page-*.png
+docs/assets/recording-frames/

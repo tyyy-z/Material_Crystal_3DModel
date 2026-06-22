@@ -4,6 +4,12 @@
 
 ![Material Crystal Studio preview](docs/assets/preview.gif)
 
+## Live Screen Recording
+
+The recording below is cropped from a local browser session to show only the project page.
+
+![Material Crystal Studio screen recording](docs/assets/screen-demo.gif)
+
 ## Why This Exists
 
 Materials Project is excellent for scientific data. Material Crystal Studio experiments with a more cinematic, dashboard-style interface for exploring compounds, lattice metadata, element systems, and MP-compatible 3D structures in one local app.
@@ -155,7 +161,7 @@ Before pushing to GitHub:
 
 - Confirm `.env` and `MP_API.env` are not tracked.
 - Run `npm test` and `npm run build`.
-- Keep `docs/assets/preview.gif` tracked.
+- Keep `docs/assets/preview.gif` and `docs/assets/screen-demo.gif` tracked.
 - Do not commit `node_modules/`, `dist/`, runtime caches, or local screenshots.
 
 ## License
