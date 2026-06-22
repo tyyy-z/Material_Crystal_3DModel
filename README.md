@@ -1,5 +1,15 @@
 # Material Crystal Studio
 
+![React](https://img.shields.io/badge/React-19.2-61DAFB?logo=react&logoColor=061722)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-7.x-646CFF?logo=vite&logoColor=white)
+![Three.js](https://img.shields.io/badge/Three.js-0.181-111111?logo=threedotjs&logoColor=white)
+![Crystal Toolkit](https://img.shields.io/badge/Crystal%20Toolkit-2026.6.9-00FFFF)
+![Materials Project](https://img.shields.io/badge/data-Materials%20Project-4F8F46)
+![status](https://img.shields.io/badge/status-public%20prototype-FF9900)
+![verification](https://img.shields.io/badge/verification-26%20tests-2EA44F)
+![license](https://img.shields.io/badge/license-MIT-2F80ED)
+
 **Material Crystal Studio** is a modern, research-oriented crystal structure explorer powered by the [Materials Project](https://next-gen.materialsproject.org/materials) and rendered through [Crystal Toolkit](https://docs.crystaltoolkit.org/). It keeps the dramatic black-studio interface of a custom web app while using Materials Project raw structures as the source of truth for 3D crystal rendering.
 
 ![Material Crystal Studio preview](docs/assets/preview.gif)
@@ -39,8 +49,8 @@ The design goal is simple: keep a high-texture frontend, but do not invent cryst
 ### 1. Clone and install JavaScript dependencies
 
 ```bash
-git clone https://github.com/<your-name>/material-crystal-studio.git
-cd material-crystal-studio
+git clone https://github.com/tyyy-z/Material_Crystal_3DModel.git
+cd Material_Crystal_3DModel
 npm install
 ```
 
