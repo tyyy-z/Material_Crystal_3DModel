@@ -155,6 +155,8 @@ What these checks cover:
 
 Material Crystal Studio uses raw Materials Project structures as the default source of truth and embeds Crystal Toolkit for the 3D viewer. The custom Three.js renderer remains only as fallback/debug code. If Materials Project production uses private viewer settings that are not available in open-source Crystal Toolkit, small lighting or UI differences may remain, but structure topology and raw input data are aligned with the public MP/Crystal Toolkit workflow.
 
+This project is experimental: materials data, derived properties, and 3D renderings may be incomplete or incorrect, so please verify critical results against Materials Project, original publications, or other trusted sources; feedback, issues, PRs, and optimization ideas are very welcome.
+
 ## Public Repo Checklist
 
 Before pushing to GitHub:
