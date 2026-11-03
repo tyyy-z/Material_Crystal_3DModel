@@ -1,0 +1,223 @@
+[
+ {
+  "id": "si",
+  "name": {
+   "en": "Silicon (diamond)",
+   "zh": "硅（金刚石结构）"
+  },
+  "formula": "Si",
+  "prototype": "diamond",
+  "spacegroup": {
+   "symbol": "Fd-3m",
+   "number": 227,
+   "crystal_system": "cubic",
+   "point_group": "m-3m"
+  },
+  "nconv": 8,
+  "nprim": 2
+ },
+ {
+  "id": "nacl",
+  "name": {
+   "en": "Sodium chloride (rock salt)",
+   "zh": "氯化钠（岩盐）"
+  },
+  "formula": "NaCl",
+  "prototype": "rock salt",
+  "spacegroup": {
+   "symbol": "Fm-3m",
+   "number": 225,
+   "crystal_system": "cubic",
+   "point_group": "m-3m"
+  },
+  "nconv": 8,
+  "nprim": 2
+ },
+ {
+  "id": "cscl",
+  "name": {
+   "en": "Caesium chloride",
+   "zh": "氯化铯"
+  },
+  "formula": "CsCl",
+  "prototype": "CsCl (B2)",
+  "spacegroup": {
+   "symbol": "Pm-3m",
+   "number": 221,
+   "crystal_system": "cubic",
+   "point_group": "m-3m"
+  },
+  "nconv": 2,
+  "nprim": 2
+ },
+ {
+  "id": "caf2",
+  "name": {
+   "en": "Calcium fluoride (fluorite)",
+   "zh": "氟化钙（萤石）"
+  },
+  "formula": "CaF2",
+  "prototype": "fluorite",
+  "spacegroup": {
+   "symbol": "Fm-3m",
+   "number": 225,
+   "crystal_system": "cubic",
+   "point_group": "m-3m"
+  },
+  "nconv": 12,
+  "nprim": 3
+ },
+ {
+  "id": "zns-zb",
+  "name": {
+   "en": "Zinc sulfide (zinc blende)",
+   "zh": "硫化锌（闪锌矿）"
+  },
+  "formula": "ZnS",
+  "prototype": "zinc blende",
+  "spacegroup": {
+   "symbol": "F-43m",
+   "number": 216,
+   "crystal_system": "cubic",
+   "point_group": "-43m"
+  },
+  "nconv": 8,
+  "nprim": 2
+ },
+ {
+  "id": "zns-wz",
+  "name": {
+   "en": "Zinc sulfide (wurtzite)",
+   "zh": "硫化锌（纤锌矿）"
+  },
+  "formula": "ZnS",
+  "prototype": "wurtzite",
+  "spacegroup": {
+   "symbol": "P6_3mc",
+   "number": 186,
+   "crystal_system": "hexagonal",
+   "point_group": "6mm"
+  },
+  "nconv": 4,
+  "nprim": 4
+ },
+ {
+  "id": "gan",
+  "name": {
+   "en": "Gallium nitride (wurtzite)",
+   "zh": "氮化镓（纤锌矿）"
+  },
+  "formula": "GaN",
+  "prototype": "wurtzite",
+  "spacegroup": {
+   "symbol": "P6_3mc",
+   "number": 186,
+   "crystal_system": "hexagonal",
+   "point_group": "6mm"
+  },
+  "nconv": 4,
+  "nprim": 4
+ },
+ {
+  "id": "srtio3",
+  "name": {
+   "en": "Strontium titanate (perovskite)",
+   "zh": "钛酸锶（钙钛矿）"
+  },
+  "formula": "SrTiO3",
+  "prototype": "cubic perovskite",
+  "spacegroup": {
+   "symbol": "Pm-3m",
+   "number": 221,
+   "crystal_system": "cubic",
+   "point_group": "m-3m"
+  },
+  "nconv": 5,
+  "nprim": 5
+ },
+ {
+  "id": "tio2-rutile",
+  "name": {
+   "en": "Titanium dioxide (rutile)",
+   "zh": "二氧化钛（金红石）"
+  },
+  "formula": "TiO2",
+  "prototype": "rutile",
+  "spacegroup": {
+   "symbol": "P4_2/mnm",
+   "number": 136,
+   "crystal_system": "tetragonal",
+   "point_group": "4/mmm"
+  },
+  "nconv": 6,
+  "nprim": 6
+ },
+ {
+  "id": "lifepo4",
+  "name": {
+   "en": "Lithium iron phosphate (olivine)",
+   "zh": "磷酸铁锂（橄榄石）"
+  },
+  "formula": "LiFePO4",
+  "prototype": "olivine",
+  "spacegroup": {
+   "symbol": "Pnma",
+   "number": 62,
+   "crystal_system": "orthorhombic",
+   "point_group": "mmm"
+  },
+  "nconv": 28,
+  "nprim": 28
+ },
+ {
+  "id": "licoo2",
+  "name": {
+   "en": "Lithium cobalt oxide (layered)",
+   "zh": "钴酸锂（层状）"
+  },
+  "formula": "LiCoO2",
+  "prototype": "α-NaFeO2 layered",
+  "spacegroup": {
+   "symbol": "R-3m",
+   "number": 166,
+   "crystal_system": "trigonal",
+   "point_group": "-3m"
+  },
+  "nconv": 12,
+  "nprim": 4
+ },
+ {
+  "id": "graphite",
+  "name": {
+   "en": "Graphite (hexagonal 2H)",
+   "zh": "石墨（六方 2H）"
+  },
+  "formula": "C",
+  "prototype": "graphite",
+  "spacegroup": {
+   "symbol": "P6_3/mmc",
+   "number": 194,
+   "crystal_system": "hexagonal",
+   "point_group": "6/mmm"
+  },
+  "nconv": 4,
+  "nprim": 4
+ },
+ {
+  "id": "quartz",
+  "name": {
+   "en": "α-Quartz (SiO2)",
+   "zh": "α-石英（二氧化硅）"
+  },
+  "formula": "SiO2",
+  "prototype": "α-quartz",
+  "spacegroup": {
+   "symbol": "P3_221",
+   "number": 154,
+   "crystal_system": "trigonal",
+   "point_group": "32"
+  },
+  "nconv": 9,
+  "nprim": 9
+ }
+]
