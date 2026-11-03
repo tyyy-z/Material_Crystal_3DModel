@@ -1,4 +1,0 @@
-crystal-toolkit==2026.6.9
-dash==3.4.0
-pymatgen==2026.5.4
-pymatgen-core==2026.5.18

@@ -1,8 +1,8 @@
-// Perf regression gate (mechanism-explainer §10.6). Serves dist-v2, renders heavy views in headless Chrome
+// Perf regression gate (mechanism-explainer §10.6). Serves dist, renders heavy views in headless Chrome
 // (SwiftShader, so numbers are relative), compares to baseline; fails on >1.5x regression or a budget breach.
 // usage: node v2/perf/perf-check.mjs [--update]
 import http from "http"; import fs from "fs"; import path from "path"; import puppeteer from "puppeteer-core";
-const ROOT = path.resolve("dist-v2"), BASE = path.resolve("v2/perf/baseline.swiftshader.json"), K = 1.5;
+const ROOT = path.resolve("dist"), BASE = path.resolve("v2/perf/baseline.swiftshader.json"), K = 1.5;
 const CASES = ["si:conventional:1", "lifepo4:conventional:4", "quartz:conventional:4", "srtio3:conventional:4", "graphite:conventional:4", "gan:conventional:3", "licoo2:primitive:4"];
 const MIME = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".json": "application/json", ".svg": "image/svg+xml" };
 const srv = http.createServer((q, r) => { const f = path.join(ROOT, decodeURIComponent(q.url.split("?")[0]).replace(/\/$/, "/index.html"));

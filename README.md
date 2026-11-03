@@ -55,7 +55,7 @@ How the data is handled:
 ```bash
 npm ci
 npm run dev          # http://localhost:5173
-npm run build        # static site in dist-v2/ (works from any sub-path)
+npm run build        # static site in dist/ (works from any sub-path)
 npm test             # geometry (node) + structure/data checks (pytest)
 npm run perf         # perf regression gate: headless Chrome, median of 3, fails on >1.5× vs baseline
 ```
@@ -85,11 +85,11 @@ data/cif/            the measured CIFs
 public/structures/   generated JSON the viewer loads
 refs/<id>/REFS.md    per-structure provenance
 tests/               pytest data checks
-.github/workflows/   pages.yml (manual-dispatch GitHub Pages deploy)
+.github/workflows/   pages.yml (tests + build; deploys GitHub Pages on push to master)
 docs/                banner, GIF, screenshots, V2_MIGRATION.md
 ```
 
-The earlier React + Materials Project app is still in the tree (`src/`, `scripts/`, `test/`). Its scripts were renamed to `npm run legacy:*`. [docs/V2_MIGRATION.md](docs/V2_MIGRATION.md) explains how it will be removed.
+v2.0 replaced the earlier React app, which used a live Materials Project search and a Python viewer server. That code is gone from the tree but kept in git history; [docs/V2_MIGRATION.md](docs/V2_MIGRATION.md) lists what was removed.
 
 ## Licence
 

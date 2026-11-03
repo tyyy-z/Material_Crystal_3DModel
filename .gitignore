@@ -1,5 +1,4 @@
 .env
-MP_API.env
 .venv/
 .env.local
 .superpowers/
@@ -7,13 +6,7 @@ MP_API.env
 __pycache__/
 node_modules/
 dist/
-public/data/runtime-materials-summary.json
-dev-server.*.log
 *.pyc
 *.pyo
 .DS_Store
 Thumbs.db
-ct-viewer-*.png
-main-page-*.png
-docs/assets/recording-frames/
-dist-v2/
