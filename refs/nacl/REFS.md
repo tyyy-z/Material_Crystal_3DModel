@@ -15,7 +15,8 @@
 
 ## Band gap
 
-- Measured (experiment): **8.75 eV** (optical (reflectance/absorption), Poole et al. 1975) — https://doi.org/10.1103/PhysRevB.11.5179
+- Measured (experiment, primary source): **8.97 eV** (direct Γ15→Γ1, 77 K, reflectance (Roessler & Walker 1968)) — https://doi.org/10.1103/PhysRev.166.599
+  - Abstract: “band gap for the lowest-energy direct transition (Γ15→Γ1) was estimated to be 8.97±0.07 eV at 77°K”
 - Computed: n/a
 
 Bond cutoffs used: Na–Cl ≤ 3.1 Å

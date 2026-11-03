@@ -13,7 +13,10 @@ for f in sorted((ROOT/"public"/"structures").glob("*.json")):
          "## Wyckoff sites", "", "| El | Wyckoff | mult | frac | CN | bond lengths (Å) |", "|---|---|---|---|---|---|"]
     L += [f"| {w['el']} | {w['wyckoff']} | {w['mult']} | {w['frac']} | {w['cn']} | {', '.join(map(str, sorted(set(w['bond_lengths']))))} |" for w in d["wyckoff"]]
     L += ["", "## Band gap", ""]
-    if "measured" in g: L.append(f"- Measured (experiment): **{g['measured']['value']} eV** ({g['measured']['kind']}) — {g['measured']['src']}")
+    if "measured" in g:
+        m = g["measured"]; v = f"**{m['value']} eV**" if m["value"] is not None else "**no gap**"
+        L.append(f"- Measured (experiment, {m['tier']} source): {v} ({m['kind']}) — {m['src']}")
+        if m.get("quote"): L.append(f"  - Abstract: “{m['quote']}”")
     else: L.append("- Measured: not yet sourced (shown as n/a in the app)")
     if "computed" in g: L.append(f"- Computed: {g['computed']['value']} eV, {g['computed']['method']} — {g['computed']['src']} (DFT-GGA underestimates gaps)")
     else: L.append("- Computed: n/a")

@@ -1,0 +1,35 @@
+# Static GitHub Pages build for the v2 viewer. Structure JSON is pre-built and committed (public/structures),
+# so CI needs no Python toolchain, no Materials Project access and no secrets.
+# Deploys ONLY on manual dispatch until the owner enables Pages; add `push: branches: [main]` afterwards.
+name: pages
+on:
+  workflow_dispatch:
+  pull_request:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency: { group: pages, cancel-in-progress: true }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: npm ci
+      - run: node --test v2/src/*.test.mjs
+      - run: pip install pytest && python -m pytest -q tests
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: dist-v2 }
+  deploy:
+    if: github.event_name == 'workflow_dispatch'
+    needs: build
+    runs-on: ubuntu-latest
+    environment: { name: github-pages, url: "${{ steps.d.outputs.page_url }}" }
+    steps:
+      - id: d
+        uses: actions/deploy-pages@v4

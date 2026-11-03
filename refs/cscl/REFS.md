@@ -15,7 +15,7 @@
 
 ## Band gap
 
-- Measured (experiment): **8.35 eV** (80 K) — https://en.wikipedia.org/wiki/Caesium_chloride
+- Measured (experiment, secondary source): **8.35 eV** (80 K) — https://en.wikipedia.org/wiki/Caesium_chloride
 - Computed: n/a
 
 Bond cutoffs used: Cs–Cl ≤ 3.8 Å

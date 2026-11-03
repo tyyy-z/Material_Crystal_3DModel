@@ -14,7 +14,7 @@
 
 ## Band gap
 
-- Measured (experiment): **1.14 eV** (indirect, 300 K) — https://en.wikipedia.org/wiki/Band_gap
+- Measured (experiment, secondary source): **1.14 eV** (indirect, 300 K) — https://en.wikipedia.org/wiki/Band_gap
 - Computed: 0.61 eV, PBE (GGA) — https://next-gen.materialsproject.org/materials/mp-149 (DFT-GGA underestimates gaps)
 
 Bond cutoffs used: Si–Si ≤ 2.6 Å

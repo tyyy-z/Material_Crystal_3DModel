@@ -1,181 +1,96 @@
-# Material Crystal Studio
+<p align="center"><img src="docs/banner.png" alt="crystal structures: built from their symmetry" width="100%"></p>
 
-![React](https://img.shields.io/badge/React-19.2-61DAFB?logo=react&logoColor=061722)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-7.x-646CFF?logo=vite&logoColor=white)
-![Three.js](https://img.shields.io/badge/Three.js-0.181-111111?logo=threedotjs&logoColor=white)
-![Crystal Toolkit](https://img.shields.io/badge/Crystal%20Toolkit-2026.6.9-00FFFF)
-![Materials Project](https://img.shields.io/badge/data-Materials%20Project-4F8F46)
-![status](https://img.shields.io/badge/status-public%20prototype-FF9900)
-![verification](https://img.shields.io/badge/verification-26%20tests-2EA44F)
-![license](https://img.shields.io/badge/license-MIT-2F80ED)
+<h1 align="center">crystal structures</h1>
 
-**Material Crystal Studio** is a modern, research-oriented crystal structure explorer powered by the [Materials Project](https://next-gen.materialsproject.org/materials) and rendered through [Crystal Toolkit](https://docs.crystaltoolkit.org/). It keeps the dramatic black-studio interface of a custom web app while using Materials Project raw structures as the source of truth for 3D crystal rendering.
+<p align="center">
+  <b>An interactive 3D viewer for 13 real crystal structures, built from measured CIFs and their space-group symmetry.</b><br>
+  English · 中文
+</p>
 
-![Material Crystal Studio preview](docs/assets/preview.gif)
+<p align="center">
+  <img alt="three.js" src="https://img.shields.io/badge/three.js-0.181-97aaf6?style=flat-square">
+  <img alt="static" src="https://img.shields.io/badge/runtime-static%20site%2C%20no%20API%20key-bbf697?style=flat-square">
+  <img alt="bilingual" src="https://img.shields.io/badge/i18n-EN%20%2F%20%E4%B8%AD%E6%96%87-fed878?style=flat-square">
+  <img alt="data" src="https://img.shields.io/badge/data-COD%20CIF%20%2B%20pymatgen-6ef8fb?style=flat-square">
+  <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/licence-MIT-000?style=flat-square"></a>
+</p>
 
-## Live Screen Recording
+---
 
-The recording below is cropped from a local browser session to show only the project page.
+<table><tr>
+<td width="58%"><img src="docs/animations.gif" alt="build from Wyckoff sites, primitive to conventional morph, supercell grow, 3₂ screw-axis spin"></td>
+<td>
+<b>What you can do</b><br><br>
+<b>Build</b>: watch each cell assemble one Wyckoff orbit at a time. Bonds grow out of the atoms, and coordination polyhedra fade in.<br><br>
+<b>Morph</b>: switch between the primitive and conventional cells. Shared atoms stay put while the cell edges interpolate.<br><br>
+<b>Grow</b>: go from a 1×1×1 cell up to a 4×4×4 supercell.<br><br>
+<b>Spin</b>: rotate the cell about its main rotation or screw axis (4₁ in Si, 3₂ in quartz, 6₃ in GaN). A ghost copy shows that the structure maps onto itself.<br><br>
+<b>Tour</b>: a 3–4 step guided tour for every structure (EN / 中文).<br><br>
+<b>Inspect</b>: hover or click any atom to see its Wyckoff site, coordination number and neighbours.
+</td></tr></table>
 
-![Material Crystal Studio screen recording](docs/assets/screen-demo.gif)
+| Desktop | Phone (中文, guided tour) |
+|---|---|
+| <img src="docs/screen-desktop.png" width="560" alt="desktop: LiFePO4"> | <img src="docs/screen-phone-zh.png" width="220" alt="phone: rutile tour in Chinese"> |
 
-## Why This Exists
+## The structures
 
-Materials Project is excellent for scientific data. Material Crystal Studio experiments with a more cinematic, dashboard-style interface for exploring compounds, lattice metadata, element systems, and MP-compatible 3D structures in one local app.
+| | Structure | Space group | Spin axis |
+|---|---|---|---|
+| Elements | Si (diamond) · C (graphite 2H) | Fd-3m · P6₃/mmc | 4₁ · 6₃ |
+| Binary | NaCl · CsCl · CaF₂ · ZnS zinc blende · ZnS wurtzite · GaN | Fm-3m · Pm-3m · Fm-3m · F-43m · P6₃mc · P6₃mc | 4 · 4 · 4 · 3 · 6₃ · 6₃ |
+| Oxides | SrTiO₃ · TiO₂ rutile · α-SiO₂ quartz | Pm-3m · P4₂/mnm · P3₂21 | 4 · 4₂ · 3₂ |
+| Battery cathodes | LiFePO₄ (olivine) · LiCoO₂ (layered) | Pnma · R-3m | 2₁ · 3 |
 
-The design goal is simple: keep a high-texture frontend, but do not invent crystal geometry. The default viewer delegates structure rendering to Crystal Toolkit, the same open-source ecosystem that powers Materials Project visualization workflows.
+How the data is handled:
+- **Geometry** comes from a measured, open-licence CIF in the [Crystallography Open Database](https://www.crystallography.net/). pymatgen refines it at build time (`symprec 0.02`), and the refined lattice is checked against the CIF.
+- **Band gaps** come in two tiers:
+  - *primary* values carry a DOI and an abstract quote. These cover NaCl, CaF₂, rutile, LiFePO₄, LiCoO₂ and α-quartz; graphite is a semimetal (ARPES), so no gap is shown.
+  - *secondary* values (Wikipedia) are labelled that way in the UI.
+- **DFT gaps** are always shown separately as *computed*, never as *measured*.
+- Each structure has its sources in `refs/<id>/REFS.md`.
 
-## Highlights
-
-- **MP-compatible 3D viewer** using `crystal-toolkit` and raw Materials Project `structure` payloads.
-- **Modern black studio UI** with a dense materials dashboard, neon controls, and responsive panels.
-- **Periodic Table search** for single-element systems like `Si` and multi-element systems like `Li-Fe-P-O`.
-- **Materials Project API proxy** through the local dev server, so `MP_API_KEY` never reaches browser JavaScript.
-- **Research panels** for symmetry, lattice constants, density, energy, band gap, and atomic site summaries.
-- **Local cached dataset** for quick startup, plus scripts to fetch fresh MP data.
-- **Verification scripts** for API URL contracts, cached MP structures, Crystal Toolkit smoke checks, and production builds.
-
-## Tech Stack
-
-- React 19 + TypeScript + Vite
-- Crystal Toolkit + Dash + pymatgen
-- Materials Project API
-- Three.js / React Three Fiber fallback utilities
-- Node test runner for local checks
-
-## Quick Start
-
-### 1. Clone and install JavaScript dependencies
-
-```bash
-git clone https://github.com/tyyy-z/Material_Crystal_3DModel.git
-cd Material_Crystal_3DModel
-npm install
-```
-
-On Windows PowerShell, if `npm` is blocked by execution policy, use `npm.cmd`:
-
-```powershell
-npm.cmd install
-```
-
-### 2. Install Python viewer dependencies
-
-Use Python 3.11+.
+## Run locally
 
 ```bash
-pip install -r requirements.txt
+npm ci
+npm run dev          # http://localhost:5173
+npm run build        # static site in dist-v2/ (works from any sub-path)
+npm test             # geometry (node) + structure/data checks (pytest)
+npm run perf         # perf regression gate: headless Chrome, median of 3, fails on >1.5× vs baseline
 ```
 
-### 3. Add your Materials Project API key
+At runtime the viewer only reads `public/structures/*.json`. There is no server, no API key and no network call.
 
-Create `MP_API.env` or `.env` in the project root:
+Deep links:
+- `?m=quartz&cell=primitive&n=2&lang=zh` opens a given structure, cell, supercell size and language.
+- `?tour=1` starts the guided tour.
+- `?rot=0` turns auto-rotate off, and `?motion=0` turns all animation off. The `prefers-reduced-motion` setting is also respected.
 
-```env
-MP_API_KEY=your_materials_project_api_key_here
-```
+## Rebuild the data
 
-Both files are ignored by git. You can copy from `.env.example`.
-
-### 4. Run the app
+Rebuilding the data needs Python with pymatgen, which is not required for the site itself:
 
 ```bash
-npm run dev
+python -m venv .venv && . .venv/bin/activate && pip install pymatgen pytest
+npm run data         # build/build_structures.py -> public/structures/*.json, build/write_refs.py -> refs/*/REFS.md
 ```
 
-Open:
+## Layout
 
-```text
-http://127.0.0.1:5173/
+```
+v2/                  the app: index.html, src/{main,geometry,i18n,tours}.js, style.css, perf/
+build/               materials.py (sources + gaps), build_structures.py (pymatgen), write_refs.py
+data/cif/            the measured CIFs
+public/structures/   generated JSON the viewer loads
+refs/<id>/REFS.md    per-structure provenance
+tests/               pytest data checks
+.github/workflows/   pages.yml (manual-dispatch GitHub Pages deploy)
+docs/                banner, GIF, screenshots, V2_MIGRATION.md
 ```
 
-The dev command starts both:
+The earlier React + Materials Project app is still in the tree (`src/`, `scripts/`, `test/`). Its scripts were renamed to `npm run legacy:*`. [docs/V2_MIGRATION.md](docs/V2_MIGRATION.md) explains how it will be removed.
 
-- Vite frontend
-- Local Crystal Toolkit viewer service
+## Licence
 
-## Materials Project Data
-
-The app ships with a small cached dataset in:
-
-```text
-public/data/materials-summary.json
-```
-
-To fetch/update data from Materials Project:
-
-```bash
-npm run fetch:materials
-```
-
-Runtime query results are written to:
-
-```text
-public/data/runtime-materials-summary.json
-```
-
-That runtime cache is ignored by git.
-
-## Verification
-
-Run the full local check suite before publishing changes:
-
-```bash
-npm test
-npm run build
-npm run verify
-npm run smoke:dev
-```
-
-What these checks cover:
-
-- MP API URL construction, including single-element `chemsys=Si`
-- Cached MP structures for examples like `GaN`, `SrTiO3`, `Si`, and `LiFePO4`
-- Crystal Toolkit server startup and material-id routing
-- Production Vite build
-- Dev server smoke test with CT iframe routing
-
-## Project Structure
-
-```text
-.
-|-- docs/assets/                 # README preview GIF and poster assets
-|-- public/data/                 # cached public Materials Project sample data
-|-- scripts/
-|   |-- ct-viewer-server.py      # local Crystal Toolkit Dash viewer
-|   |-- dev-server.mjs           # Vite + CT service launcher
-|   |-- fetch-materials.mjs      # Materials Project fetch script
-|   |-- smoke-dev.mjs            # dev server smoke test
-|   `-- verify.mjs               # static + CT verification
-|-- src/
-|   |-- App.tsx                  # main UI
-|   |-- data/elements.ts         # Periodic Table model
-|   |-- materials-data.js        # MP document mapping
-|   |-- mp-api-client.js         # MP API URL/key helpers
-|   `-- styles.css               # black studio interface
-|-- test/                        # node:test coverage
-|-- .env.example
-|-- requirements.txt
-|-- package.json
-`-- README.md
-```
-
-## Notes on Accuracy
-
-Material Crystal Studio uses raw Materials Project structures as the default source of truth and embeds Crystal Toolkit for the 3D viewer. The custom Three.js renderer remains only as fallback/debug code. If Materials Project production uses private viewer settings that are not available in open-source Crystal Toolkit, small lighting or UI differences may remain, but structure topology and raw input data are aligned with the public MP/Crystal Toolkit workflow.
-
-This project is experimental: materials data, derived properties, and 3D renderings may be incomplete or incorrect, so please verify critical results against Materials Project, original publications, or other trusted sources; feedback, issues, PRs, and optimization ideas are very welcome.
-
-## Public Repo Checklist
-
-Before pushing to GitHub:
-
-- Confirm `.env` and `MP_API.env` are not tracked.
-- Run `npm test` and `npm run build`.
-- Keep `docs/assets/preview.gif` and `docs/assets/screen-demo.gif` tracked.
-- Do not commit `node_modules/`, `dist/`, runtime caches, or local screenshots.
-
-## License
-
-MIT
+MIT. The CIFs are from COD (CC0 / public domain).

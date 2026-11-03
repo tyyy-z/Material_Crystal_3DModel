@@ -32,4 +32,21 @@ def test_structure_matches_reference(m):
     cnt = Counter(x["w"] for x in c["sites"])
     for k, w in enumerate(d["wyckoff"]): assert cnt[k] == w["mult"], f"orbit {w['el']} {w['wyckoff']}: {cnt[k]} sites vs mult {w['mult']}"
     gm = d["band_gap"].get("measured")
-    if gm: assert gm["src"].startswith("https://")
+    if gm:
+        assert gm["src"].startswith("https://")
+        assert gm["tier"] in ("primary", "secondary")
+        if gm["tier"] == "primary": assert gm["src"].startswith("https://doi.org/") and gm["quote"]
+        assert "amorphous" not in gm["kind"]
+
+
+def test_sym_axis():
+    """Every structure ships a proper rotation / screw axis for the symmetry-spin animation."""
+    import math
+    for p in (ROOT / "public" / "structures").glob("*.json"):
+        if p.name == "index.json":
+            continue
+        ax = json.loads(p.read_text())["sym_axis"]
+        assert ax["order"] >= 2, p.name
+        assert abs(math.hypot(*ax["dir"]) - 1) < 1e-3, p.name
+        assert abs(abs(ax["angle"]) - 360 / ax["order"]) < 1e-6, p.name
+        assert ax["label"][0] == str(ax["order"]), p.name

@@ -10,13 +10,19 @@ const srv = http.createServer((q, r) => { const f = path.join(ROOT, decodeURICom
 await new Promise((ok) => srv.listen(0, "127.0.0.1", ok)); const port = srv.address().port;
 const b = await puppeteer.launch({ executablePath: process.env.CHROME || "/usr/bin/google-chrome", args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--no-sandbox"] });
 const res = {};
+const RUNS = 3, med = (a) => [...a].sort((x, y) => x - y)[a.length >> 1]; // SwiftShader is noisy: median of 3 fresh loads
 for (const c of CASES) {
-  const [m, cell, n] = c.split(":"), p = await b.newPage(); await p.setViewport({ width: 1440, height: 900 });
-  await p.goto(`http://127.0.0.1:${port}/?m=${m}&cell=${cell}&n=${n}`, { waitUntil: "networkidle0" }); await new Promise((r) => setTimeout(r, 4000));
-  const x = await p.evaluate(() => window.__perf()); res[c] = { frameMs: x.p95Ms > 0 ? +((x.avgMs + x.p95Ms) / 2).toFixed(1) : x.avgMs, drawCalls: x.drawCalls, triangles: x.triangles, textures: x.textures }; await p.close();
+  const [m, cell, n] = c.split(":"), runs = [];
+  for (let i = 0; i < RUNS; i++) {
+    const p = await b.newPage(); await p.setViewport({ width: 1440, height: 900 });
+    // rot=0 + wait past the build animation so every run measures the same static frame
+    await p.goto(`http://127.0.0.1:${port}/?m=${m}&cell=${cell}&n=${n}&rot=0`, { waitUntil: "networkidle0" }); await new Promise((r) => setTimeout(r, 4000));
+    const x = await p.evaluate(() => window.__perf()); runs.push({ frameMs: x.p95Ms > 0 ? +((x.avgMs + x.p95Ms) / 2).toFixed(1) : x.avgMs, drawCalls: x.drawCalls, triangles: x.triangles, textures: x.textures }); await p.close();
+  }
+  res[c] = { frameMs: med(runs.map((r) => r.frameMs)), drawCalls: med(runs.map((r) => r.drawCalls)), triangles: med(runs.map((r) => r.triangles)), textures: runs[0].textures, runs: runs.map((r) => r.frameMs) };
 }
 await b.close(); srv.close();
-if (process.argv.includes("--update") || !fs.existsSync(BASE)) { fs.writeFileSync(BASE, JSON.stringify({ renderer: "swiftshader 1440x900", factor: K, cases: res }, null, 1) + "\n"); console.log("baseline written", BASE); }
+if (process.argv.includes("--update") || !fs.existsSync(BASE)) { fs.writeFileSync(BASE, JSON.stringify({ renderer: "swiftshader 1440x900", factor: K, runs: RUNS, stat: "median", cases: res }, null, 1) + "\n"); console.log("baseline written", BASE); }
 const base = JSON.parse(fs.readFileSync(BASE, "utf8")).cases; let bad = 0;
 for (const [c, r] of Object.entries(res)) { const o = base[c] || r, fails = [];
   for (const k of ["frameMs", "drawCalls", "triangles"]) if (r[k] > o[k] * K) fails.push(`${k} ${o[k]}→${r[k]}`);

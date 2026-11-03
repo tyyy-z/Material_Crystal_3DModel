@@ -15,7 +15,8 @@
 
 ## Band gap
 
-- Measured (experiment): **0.0 eV** (semimetal (π-band overlap ≈ 0.04 eV), no gap) — https://en.wikipedia.org/wiki/Graphite#Electronic_properties
+- Measured (experiment, primary source): **no gap** (semimetal: π bands cross E_F, no gap (ARPES, Grüneis et al. 2008)) — https://doi.org/10.1103/PhysRevLett.100.037601
+  - Abstract: “… the breakdown of the independent electron picture in semi-metallic graphite”
 - Computed: n/a
 
 Bond cutoffs used: C–C ≤ 1.6 Å

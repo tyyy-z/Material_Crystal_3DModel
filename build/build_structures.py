@@ -40,6 +40,36 @@ def cell(s, wmap=None):
                 alpha=round(L.alpha,4), beta=round(L.beta,4), gamma=round(L.gamma,4), volume=round(L.volume,4),
                 sites=[dict(el=site.specie.symbol, frac=[round(float(x), 6) % 1.0 for x in site.frac_coords], **({"w": wmap[k]} if wmap else {})) for k, site in enumerate(s)])
 
+SUB = str.maketrans("0123456789", "₀₁₂₃₄₅₆₇₈₉")
+def sym_axis(s):
+    """Highest-order rotation (pure preferred, else screw) for the spin animation, in cartesian Å.
+    Among equal candidates choose the axis closest to the cell centre."""
+    L = s.lattice.matrix; ctr = 0.5 * L.sum(0); best = None
+    for op in SpacegroupAnalyzer(s, symprec=0.02).get_symmetry_operations(cartesian=False):
+        R, t0 = op.rotation_matrix, op.translation_vector
+        if round(np.linalg.det(R)) != 1 or np.allclose(R, np.eye(3)): continue
+        for sh in np.array(np.meshgrid([-1, 0, 1], [-1, 0, 1], [-1, 0, 1])).T.reshape(-1, 3):
+            t = t0 + sh
+            Rc = L.T @ R @ np.linalg.inv(L.T)  # cartesian rotation
+            tr = np.clip((np.trace(Rc) - 1) / 2, -1, 1); ang = np.arccos(tr); n = int(round(2 * np.pi / ang))
+            w, v = np.linalg.eig(Rc); u = np.real(v[:, np.argmin(abs(w - 1))]); u /= np.linalg.norm(u)
+            if u @ np.array([0.3, 0.2, 1.0]) < 0: u = -u
+            tc = t @ L; tau = sum(np.linalg.matrix_power(Rc, k) @ tc for k in range(n)) / n  # screw component
+            pt = np.linalg.lstsq(np.eye(3) - Rc, tc - tau, rcond=None)[0]
+            pt = pt - u * ((pt - ctr) @ u)  # foot of the axis nearest the centre
+            screw = float(tau @ u); lat = abs(screw) > 1e-3
+            sgn = 1.0 if (np.array([Rc[2,1]-Rc[1,2], Rc[0,2]-Rc[2,0], Rc[1,0]-Rc[0,1]]) @ u) >= 0 else -1.0
+            dist = float(np.linalg.norm(np.cross(ctr - pt, u)))
+            lab = str(n)
+            if lat:
+                per = [np.linalg.norm(v) for v in (*L, L.sum(0)) if abs(abs(v @ u) - np.linalg.norm(v)) < 1e-3]
+                m = int(round(n * (screw * sgn % (per[0] if per else 1e9)) / per[0])) % n if per else 1
+                lab = str(n) + str(m).translate(SUB)
+            key = (-n, lat, round(dist, 2), round(abs(screw), 2))
+            if best is None or key < best[0]:
+                best = (key, dict(order=n, dir=np.round(u, 5).tolist(), point=np.round(pt, 4).tolist(), screw=round(screw, 4), angle=round(sgn * 360 / n, 3), label=lab))
+    return best[1] if best else None
+
 def neighbours(s, i, rules):
     el = s[i].specie.symbol; out = []
     for n in s.get_neighbors(s[i], max(rules.values()) + 0.05):
@@ -54,6 +84,7 @@ def build(m):
     sga = SpacegroupAnalyzer(s0, symprec=0.02)
     conv = sga.get_refined_structure(); sga_c = SpacegroupAnalyzer(conv, symprec=0.02)
     prim = sga_c.get_primitive_standard_structure()
+    if len(prim) == len(conv): prim = conv.copy()  # P lattice: keep the same origin/orientation so the morph is identity
     sym = sga_c.get_symmetrized_structure()
     rules = {tuple(k): v for k, v in m["bonds"].items()}
     wyck, cn_by_el = [], {}
@@ -97,7 +128,8 @@ def build(m):
         band_gap=m.get("gap", {}), bond_rules=[dict(a=a, b=b, max=v, draw=(a, b) not in m.get("nodraw", [])) for (a, b), v in rules.items()],
         polyhedra_elements=m["polyhedra"], elements=elements,
         wyckoff=wyck, coordination=cn_by_el, density=round(float(conv.density), 4),
-        conventional=cell(conv, site_wyckoff(conv, rules, wyck)), primitive=cell(prim, site_wyckoff(prim, rules, wyck)), conventional_bonds=bonds, conventional_polyhedra=poly)
+        conventional=cell(conv, site_wyckoff(conv, rules, wyck)), primitive=cell(prim, site_wyckoff(prim, rules, wyck)), conventional_bonds=bonds, conventional_polyhedra=poly,
+        sym_axis=sym_axis(conv))
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True); index = []

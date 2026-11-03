@@ -15,7 +15,8 @@
 
 ## Band gap
 
-- Measured (experiment): **3.03 eV** (indirect, absorption edge 1.6 K, Pascual et al. 1978) — https://doi.org/10.1103/PhysRevB.18.5606
+- Measured (experiment, primary source): **3.03 eV** (direct (dipole-forbidden), E⊥c, 1.6 K; indirect 3.06 eV (Pascual et al. 1978)) — https://doi.org/10.1103/PhysRevB.18.5606
+  - Abstract: “indirect allowed transition … (3.061-3.065 eV at 1.6°K) … forbidden direct transition Γ3v→Γ1c … (3.031 eV at 1.6°K)”
 - Computed: n/a
 
 Bond cutoffs used: Ti–O ≤ 2.2 Å

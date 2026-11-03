@@ -15,7 +15,8 @@
 
 ## Band gap
 
-- Measured (experiment): **12.1 eV** (far-UV reflectance, Rubloff 1972) — https://doi.org/10.1103/PhysRevB.5.662
+- Measured (experiment, primary source): **11.8 eV** (298 K, two-photon absorption (Tsujibayashi et al. 2002)) — https://doi.org/10.1063/1.1471939
+  - Abstract: “The band gap energies of CaF2 and BaF2 are obtained as 11.8 and 10.6 eV at 298 K”
 - Computed: n/a
 
 Bond cutoffs used: Ca–F ≤ 2.6 Å

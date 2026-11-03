@@ -19,7 +19,8 @@
 
 ## Band gap
 
-- Measured (experiment): **3.8 eV** (optical, diffuse reflectance (3.8–4.0), Zhou et al. 2004) — https://doi.org/10.1016/j.ssc.2004.07.055
+- Measured (experiment, primary source): **3.8 eV** (optical, diffuse reflectance, 3.8–4.0 eV (Zhou et al. 2004)) — https://doi.org/10.1016/j.ssc.2004.07.055
+  - Abstract: “The results obtained from experiment (3.8–4.0 eV) and GGA+U computations (3.7 eV) are in very good agreement”
 - Computed: 3.92 eV, GGA+U — https://next-gen.materialsproject.org/materials/mp-19017 (DFT-GGA underestimates gaps)
 
 Bond cutoffs used: Fe–O ≤ 2.4 Å, P–O ≤ 1.7 Å, Li–O ≤ 2.4 Å

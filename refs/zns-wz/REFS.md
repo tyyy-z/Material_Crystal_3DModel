@@ -15,7 +15,7 @@
 
 ## Band gap
 
-- Measured (experiment): **3.91 eV** (hexagonal, 300 K) — https://en.wikipedia.org/wiki/Zinc_sulfide
+- Measured (experiment, secondary source): **3.91 eV** (hexagonal, 300 K) — https://en.wikipedia.org/wiki/Zinc_sulfide
 - Computed: n/a
 
 Bond cutoffs used: Zn–S ≤ 2.6 Å

@@ -15,7 +15,7 @@
 
 ## Band gap
 
-- Measured (experiment): **3.4 eV** (direct, 300 K) — https://en.wikipedia.org/wiki/Gallium_nitride
+- Measured (experiment, secondary source): **3.4 eV** (direct, 300 K) — https://en.wikipedia.org/wiki/Gallium_nitride
 - Computed: 1.74 eV, PBE (GGA) — https://next-gen.materialsproject.org/materials/mp-804 (DFT-GGA underestimates gaps)
 
 Bond cutoffs used: Ga–N ≤ 2.2 Å

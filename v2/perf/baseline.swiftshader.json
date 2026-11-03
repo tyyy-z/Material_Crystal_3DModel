@@ -1,48 +1,85 @@
 {
  "renderer": "swiftshader 1440x900",
  "factor": 1.5,
+ "runs": 3,
+ "stat": "median",
  "cases": {
   "si:conventional:1": {
-   "frameMs": 122.1,
+   "frameMs": 83.8,
    "drawCalls": 3,
    "triangles": 6528,
-   "textures": 3
+   "textures": 3,
+   "runs": [
+    88.9,
+    75.1,
+    83.8
+   ]
   },
   "lifepo4:conventional:4": {
-   "frameMs": 729.5,
+   "frameMs": 612.9,
    "drawCalls": 12,
    "triangles": 299344,
-   "textures": 3
+   "textures": 3,
+   "runs": [
+    612.9,
+    957.7,
+    521.2
+   ]
   },
   "quartz:conventional:4": {
-   "frameMs": 849.4,
+   "frameMs": 462.5,
    "drawCalls": 7,
    "triangles": 194880,
-   "textures": 3
+   "textures": 3,
+   "runs": [
+    461.1,
+    684.3,
+    462.5
+   ]
   },
   "srtio3:conventional:4": {
-   "frameMs": 803.3,
+   "frameMs": 851.5,
    "drawCalls": 8,
    "triangles": 153020,
-   "textures": 3
+   "textures": 3,
+   "runs": [
+    851.5,
+    463.1,
+    924.2
+   ]
   },
   "graphite:conventional:4": {
-   "frameMs": 405.5,
+   "frameMs": 275.1,
    "drawCalls": 3,
    "triangles": 123392,
-   "textures": 3
+   "textures": 3,
+   "runs": [
+    275.1,
+    464.9,
+    258.6
+   ]
   },
   "gan:conventional:3": {
-   "frameMs": 419.8,
+   "frameMs": 403,
    "drawCalls": 7,
    "triangles": 69240,
-   "textures": 3
+   "textures": 3,
+   "runs": [
+    380,
+    403,
+    423.6
+   ]
   },
   "licoo2:primitive:4": {
-   "frameMs": 324,
+   "frameMs": 234,
    "drawCalls": 8,
    "triangles": 93796,
-   "textures": 3
+   "textures": 3,
+   "runs": [
+    198.3,
+    234,
+    315
+   ]
   }
  }
 }

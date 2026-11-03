@@ -16,7 +16,7 @@
 
 ## Band gap
 
-- Measured (experiment): **3.25 eV** (indirect (direct 3.75)) — https://en.wikipedia.org/wiki/Strontium_titanate
+- Measured (experiment, secondary source): **3.25 eV** (indirect (direct 3.75)) — https://en.wikipedia.org/wiki/Strontium_titanate
 - Computed: 1.77 eV, PBE (GGA) — https://next-gen.materialsproject.org/materials/mp-5229 (DFT-GGA underestimates gaps)
 
 Bond cutoffs used: Ti–O ≤ 2.2 Å, Sr–O ≤ 3.0 Å

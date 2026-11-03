@@ -16,7 +16,8 @@
 
 ## Band gap
 
-- Measured (experiment): **2.7 eV** (PES + BIS (±0.3), van Elp et al. 1991) — https://doi.org/10.1103/PhysRevB.44.6090
+- Measured (experiment, primary source): **2.7 eV** (XPS + BIS (van Elp et al. 1991)) — https://doi.org/10.1103/PhysRevB.44.6090
+  - Abstract: “LiCoO2 is an insulator with a gap of 2.7 eV”
 - Computed: n/a
 
 Bond cutoffs used: Co–O ≤ 2.1 Å, Li–O ≤ 2.3 Å

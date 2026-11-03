@@ -15,7 +15,8 @@
 
 ## Band gap
 
-- Measured (experiment): **9.0 eV** (SiO2 (Band gap table cites amorphous SiO2)) — https://en.wikipedia.org/wiki/Band_gap
+- Measured (experiment, primary source): **9.65 eV** (α-quartz single crystal, EELS low-loss (Garvie et al. 2000)) — https://doi.org/10.2138/am-2000-5-611
+  - Abstract: “A band gap of 9.65 eV is measured from the low-loss spectrum”
 - Computed: n/a
 
 Bond cutoffs used: Si–O ≤ 1.8 Å

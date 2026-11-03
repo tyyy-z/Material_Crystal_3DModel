@@ -20,9 +20,14 @@
   <div class="seg" id="sup" aria-label="Supercell"><button data-v="1">1×</button><button data-v="2">2×</button><button data-v="3">3×</button><button data-v="4">4×</button></div>
   <button class="tg" id="poly" aria-pressed="true"><span class="sw"></span><span data-i="polyhedra"></span></button>
   <button class="tg" id="lab" aria-pressed="false"><span class="sw"></span><span data-i="labels"></span></button>
+  <button class="tg2" id="symb" data-t="symmetry"><svg viewBox="0 0 20 20"><path d="M10 2v16M5 6.5a6 3 0 1 0 10 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M13.4 3.6 15 6.5l-3.2.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ax"></span></button>
+  <button class="ic" id="rot" data-t="autorotate" aria-pressed="true" aria-label="Auto-rotate"><svg viewBox="0 0 20 20"><path d="M3 10a7 3.2 0 0 0 14 0M17 10a7 3.2 0 0 0-11.5-2.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M7.6 5.4 5.3 7.7l3 .9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   <button class="ic" id="reset" data-t="reset" aria-label="Reset view"><svg viewBox="0 0 20 20"><path d="M4 10a6 6 0 1 0 2-4.5M4 3v3h3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
 </div>
 <div class="hint" id="hint" data-i="hint"></div>
+<button class="tourb glass" id="tourb" aria-pressed="false"><svg viewBox="0 0 20 20"><path d="M7 5.5v9l7-4.5z" fill="currentColor"/></svg><span data-i="tour"></span></button>
+<div class="cap glass" id="cap" aria-live="polite"></div>
+<div class="tour glass" id="tour" hidden role="dialog" aria-live="polite"></div>
 <div class="tip glass" id="tip" hidden></div>
 <section class="panel glass" id="panel"><button class="grab" id="grab" aria-label="Details"><span></span></button><div class="pscroll" id="info"></div></section>
 <script type="module" src="./src/main.js"></script>
