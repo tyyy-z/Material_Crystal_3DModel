@@ -15,7 +15,7 @@
 
 ## Band gap
 
-- Measured: not yet sourced (shown as n/a in the app)
+- Measured (experiment): **12.1 eV** (far-UV reflectance, Rubloff 1972) — https://doi.org/10.1103/PhysRevB.5.662
 - Computed: n/a
 
 Bond cutoffs used: Ca–F ≤ 2.6 Å

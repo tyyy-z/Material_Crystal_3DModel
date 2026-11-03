@@ -40,3 +40,18 @@ MATERIALS = [
       bonds={("Si","O"):1.8}, polyhedra=["Si"], expect=dict(sg=154, nconv=9, cn={"Si":{"O":4},"O":{"Si":2}}),
       gap=dict(measured=dict(value=9.0, kind="SiO2 (Band gap table cites amorphous SiO2)", src="https://en.wikipedia.org/wiki/Band_gap"))),
 ]
+
+# Measured gaps from primary literature (DOI resolved via Crossref, chunk 3). Values transcribed from the papers'
+# reported numbers; `verify` marks ones still to be re-read against the full text before deploy.
+_D = "https://doi.org/{}"
+MEASURED = {
+    "nacl": dict(value=8.75, kind="optical (reflectance/absorption), Poole et al. 1975", src=_D.format("10.1103/PhysRevB.11.5179"), verify=True),
+    "caf2": dict(value=12.1, kind="far-UV reflectance, Rubloff 1972", src=_D.format("10.1103/PhysRevB.5.662"), verify=True),
+    "tio2-rutile": dict(value=3.03, kind="indirect, absorption edge 1.6 K, Pascual et al. 1978", src=_D.format("10.1103/PhysRevB.18.5606"), verify=True),
+    "lifepo4": dict(value=3.8, kind="optical, diffuse reflectance (3.8–4.0), Zhou et al. 2004", src=_D.format("10.1016/j.ssc.2004.07.055"), verify=True),
+    "licoo2": dict(value=2.7, kind="PES + BIS (±0.3), van Elp et al. 1991", src=_D.format("10.1103/PhysRevB.44.6090"), verify=True),
+    "graphite": dict(value=0.0, kind="semimetal (π-band overlap ≈ 0.04 eV), no gap", src="https://en.wikipedia.org/wiki/Graphite#Electronic_properties", verify=True),
+}
+for _m in MATERIALS:
+    if _m["id"] in MEASURED:
+        _m.setdefault("gap", {})["measured"] = MEASURED[_m["id"]]

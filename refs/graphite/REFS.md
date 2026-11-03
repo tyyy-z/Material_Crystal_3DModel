@@ -15,7 +15,7 @@
 
 ## Band gap
 
-- Measured: not yet sourced (shown as n/a in the app)
+- Measured (experiment): **0.0 eV** (semimetal (π-band overlap ≈ 0.04 eV), no gap) — https://en.wikipedia.org/wiki/Graphite#Electronic_properties
 - Computed: n/a
 
 Bond cutoffs used: C–C ≤ 1.6 Å

@@ -15,7 +15,7 @@
 
 ## Band gap
 
-- Measured: not yet sourced (shown as n/a in the app)
+- Measured (experiment): **3.03 eV** (indirect, absorption edge 1.6 K, Pascual et al. 1978) — https://doi.org/10.1103/PhysRevB.18.5606
 - Computed: n/a
 
 Bond cutoffs used: Ti–O ≤ 2.2 Å

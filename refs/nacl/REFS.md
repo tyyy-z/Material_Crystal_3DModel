@@ -15,7 +15,7 @@
 
 ## Band gap
 
-- Measured: not yet sourced (shown as n/a in the app)
+- Measured (experiment): **8.75 eV** (optical (reflectance/absorption), Poole et al. 1975) — https://doi.org/10.1103/PhysRevB.11.5179
 - Computed: n/a
 
 Bond cutoffs used: Na–Cl ≤ 3.1 Å

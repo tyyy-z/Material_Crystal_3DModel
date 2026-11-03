@@ -16,7 +16,7 @@
 
 ## Band gap
 
-- Measured: not yet sourced (shown as n/a in the app)
+- Measured (experiment): **2.7 eV** (PES + BIS (±0.3), van Elp et al. 1991) — https://doi.org/10.1103/PhysRevB.44.6090
 - Computed: n/a
 
 Bond cutoffs used: Co–O ≤ 2.1 Å, Li–O ≤ 2.3 Å

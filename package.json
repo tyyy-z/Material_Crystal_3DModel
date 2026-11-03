@@ -15,7 +15,8 @@
     "v2:data": "python build/build_structures.py && python build/write_refs.py",
     "v2:dev": "vite -c vite.v2.config.mjs",
     "v2:build": "vite build -c vite.v2.config.mjs",
-    "v2:test": "node --test v2/src/*.test.mjs && python -m pytest -q tests"
+    "v2:test": "node --test v2/src/*.test.mjs && python -m pytest -q tests",
+    "v2:perf": "node v2/perf/perf-check.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
@@ -30,6 +31,7 @@
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "@vitejs/plugin-react": "^5.1.0",
+    "puppeteer-core": "^25.16.0",
     "typescript": "~5.9.3",
     "vite": "^7.2.2"
   }

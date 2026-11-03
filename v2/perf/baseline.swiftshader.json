@@ -1,0 +1,48 @@
+{
+ "renderer": "swiftshader 1440x900",
+ "factor": 1.5,
+ "cases": {
+  "si:conventional:1": {
+   "frameMs": 122.1,
+   "drawCalls": 3,
+   "triangles": 6528,
+   "textures": 3
+  },
+  "lifepo4:conventional:4": {
+   "frameMs": 729.5,
+   "drawCalls": 12,
+   "triangles": 299344,
+   "textures": 3
+  },
+  "quartz:conventional:4": {
+   "frameMs": 849.4,
+   "drawCalls": 7,
+   "triangles": 194880,
+   "textures": 3
+  },
+  "srtio3:conventional:4": {
+   "frameMs": 803.3,
+   "drawCalls": 8,
+   "triangles": 153020,
+   "textures": 3
+  },
+  "graphite:conventional:4": {
+   "frameMs": 405.5,
+   "drawCalls": 3,
+   "triangles": 123392,
+   "textures": 3
+  },
+  "gan:conventional:3": {
+   "frameMs": 419.8,
+   "drawCalls": 7,
+   "triangles": 69240,
+   "textures": 3
+  },
+  "licoo2:primitive:4": {
+   "frameMs": 324,
+   "drawCalls": 8,
+   "triangles": 93796,
+   "textures": 3
+  }
+ }
+}
