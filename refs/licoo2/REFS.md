@@ -2,7 +2,7 @@
 
 - Space group: **R-3m (#166)**, trigonal
 - Structure source: COD [4505482](https://www.crystallography.net/cod/4505482.html) — CIF https://www.crystallography.net/cod/4505482.cif
-- Publication: Crystal Growth &amp; Design (2012), DOI [10.1021/cg201238n](https://doi.org/10.1021/cg201238n)
+- Publication: Crystal Growth & Design (2012), DOI [10.1021/cg201238n](https://doi.org/10.1021/cg201238n)
 - Measured cell (from CIF): a=2.815 b=2.815 c=14.0516 Å; α=90.0 β=90.0 γ=120.0°
 - Conventional cell: 12 atoms; primitive: 4 atoms
 

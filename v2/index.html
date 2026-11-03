@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Crystal Structures — interactive 3D</title><link rel="icon" href="data:,"><link rel="stylesheet" href="./src/style.css"></head>
+<body>
+<header class="bar"><h1>Crystal Structures</h1>
+  <select id="mat" aria-label="Material"></select>
+  <div class="seg" id="cell"><button data-v="conventional" class="on">Conventional</button><button data-v="primitive">Primitive</button></div>
+  <div class="seg" id="sup"><button data-v="1" class="on">1×</button><button data-v="2">2×</button><button data-v="3">3×</button><button data-v="4">4×</button></div>
+  <label class="chk"><input type="checkbox" id="poly" checked> Polyhedra</label>
+</header>
+<main><div id="view"></div><aside id="info"></aside></main>
+<script type="module" src="./src/main.js"></script>
+</body></html>

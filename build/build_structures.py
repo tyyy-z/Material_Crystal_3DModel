@@ -1,5 +1,5 @@
 """Build-time only: CIF (COD) -> static JSON for the browser. Run: python build/build_structures.py"""
-import json, re, warnings, sys, pathlib
+import json, re, warnings, sys, pathlib, html
 import numpy as np, yaml
 warnings.filterwarnings("ignore")
 from pymatgen.core import Structure, Element
@@ -14,14 +14,17 @@ SCHEMES = yaml.safe_load(open(pathlib.Path(Element.__module__ and __import__("py
 
 def hexc(rgb): return "#%02x%02x%02x" % tuple(rgb)
 def cif_field(text, key):
-    m = re.search(rf"^{key}\s+(.+)$", text, re.M); return m.group(1).strip().strip("'") if m else None
+    m = re.search(rf"^{key}[ \t]+(\S.*)$", text, re.M)
+    if m: return html.unescape(m.group(1).strip().strip("'"))
+    m = re.search(rf"^{key}\s*\n;\s*\n(.+?)\n;", text, re.M | re.S)  # multi-line ;...; value
+    return " ".join(m.group(1).split()) if m else None
 def num(v): return float(re.sub(r"\(.*\)", "", v)) if v else None
 
 def cell(s):
     L = s.lattice
     return dict(matrix=np.round(L.matrix, 6).tolist(), a=round(L.a,5), b=round(L.b,5), c=round(L.c,5),
                 alpha=round(L.alpha,4), beta=round(L.beta,4), gamma=round(L.gamma,4), volume=round(L.volume,4),
-                sites=[dict(el=site.specie.symbol, frac=[round(float(x) % 1.0, 6) for x in site.frac_coords]) for site in s])
+                sites=[dict(el=site.specie.symbol, frac=[round(float(x), 6) % 1.0 for x in site.frac_coords]) for site in s])
 
 def neighbours(s, i, rules):
     el = s[i].specie.symbol; out = []
@@ -45,7 +48,7 @@ def build(m):
         cn = {}
         for n in nb: cn[n.specie.symbol] = cn.get(n.specie.symbol, 0) + 1
         d = sorted(round(n.nn_distance, 4) for n in nb)
-        wyck.append(dict(el=el, wyckoff=wsym, mult=len(idxs), frac=[round(float(x) % 1, 5) for x in sym[i].frac_coords],
+        wyck.append(dict(el=el, wyckoff=wsym, mult=len(idxs), frac=[round(float(x), 5) % 1.0 for x in sym[i].frac_coords],
                          cn=cn, cn_total=len(nb), bond_lengths=d))
         prev = cn_by_el.get(el)
         cn_by_el[el] = cn if prev is None else {k: min(prev.get(k, 0), v) for k, v in cn.items()} if prev != cn else prev
@@ -77,7 +80,7 @@ def build(m):
         source=dict(db="COD", cod_id=m["cod"], url=COD.format(m["cod"]), cif_url=f"https://www.crystallography.net/cod/{m['cod']}.cif",
                     doi=doi, journal=cif_field(text, "_journal_name_full"), year=cif_field(text, "_journal_year"),
                     measured_cell=meas),
-        band_gap=m.get("gap", {}), bond_rules=[dict(a=a, b=b, max=v) for (a, b), v in rules.items()],
+        band_gap=m.get("gap", {}), bond_rules=[dict(a=a, b=b, max=v, draw=(a, b) not in m.get("nodraw", [])) for (a, b), v in rules.items()],
         polyhedra_elements=m["polyhedra"], elements=elements,
         wyckoff=wyck, coordination=cn_by_el, density=round(float(conv.density), 4),
         conventional=cell(conv), primitive=cell(prim), conventional_bonds=bonds, conventional_polyhedra=poly)
