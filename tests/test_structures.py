@@ -24,5 +24,12 @@ def test_structure_matches_reference(m):
     # polyhedra present when requested
     for el in m["polyhedra"]:
         assert any(p["el"] == el for p in d["conventional_polyhedra"]), f"missing {el} polyhedra"
+    # every site maps to a Wyckoff orbit of its own element, and orbit sizes add up
+    for cname in ("conventional", "primitive"):
+        sites = d[cname]["sites"]
+        assert all(d["wyckoff"][x["w"]]["el"] == x["el"] for x in sites)
+    from collections import Counter
+    cnt = Counter(x["w"] for x in c["sites"])
+    for k, w in enumerate(d["wyckoff"]): assert cnt[k] == w["mult"], f"orbit {w['el']} {w['wyckoff']}: {cnt[k]} sites vs mult {w['mult']}"
     gm = d["band_gap"].get("measured")
     if gm: assert gm["src"].startswith("https://")

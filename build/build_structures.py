@@ -20,11 +20,25 @@ def cif_field(text, key):
     return " ".join(m.group(1).split()) if m else None
 def num(v): return float(re.sub(r"\(.*\)", "", v)) if v else None
 
-def cell(s):
+def site_wyckoff(s, rules, wyck):
+    """Index into `wyck` for every site of s, by (element, Wyckoff letter, bond-length signature)."""
+    ss = SpacegroupAnalyzer(s, symprec=0.02).get_symmetrized_structure(); out = [None] * len(s)
+    for idxs, wsym in zip(ss.equivalent_indices, ss.wyckoff_symbols):
+        i = idxs[0]; el = ss[i].specie.symbol; letter = re.sub(r"^\d+", "", wsym)
+        sig = sorted(n.nn_distance for n in neighbours(ss, i, rules))
+        cands = [k for k, w in enumerate(wyck) if w["el"] == el and re.sub(r"^\d+", "", w["wyckoff"]) == letter] or \
+                [k for k, w in enumerate(wyck) if w["el"] == el]
+        def score(k):
+            b = wyck[k]["bond_lengths"]; return (len(b) != len(sig), sum(abs(x - y) for x, y in zip(b, sig)))
+        best = min(cands, key=score)
+        for j in idxs: out[j] = best
+    return out
+
+def cell(s, wmap=None):
     L = s.lattice
     return dict(matrix=np.round(L.matrix, 6).tolist(), a=round(L.a,5), b=round(L.b,5), c=round(L.c,5),
                 alpha=round(L.alpha,4), beta=round(L.beta,4), gamma=round(L.gamma,4), volume=round(L.volume,4),
-                sites=[dict(el=site.specie.symbol, frac=[round(float(x), 6) % 1.0 for x in site.frac_coords]) for site in s])
+                sites=[dict(el=site.specie.symbol, frac=[round(float(x), 6) % 1.0 for x in site.frac_coords], **({"w": wmap[k]} if wmap else {})) for k, site in enumerate(s)])
 
 def neighbours(s, i, rules):
     el = s[i].specie.symbol; out = []
@@ -83,7 +97,7 @@ def build(m):
         band_gap=m.get("gap", {}), bond_rules=[dict(a=a, b=b, max=v, draw=(a, b) not in m.get("nodraw", [])) for (a, b), v in rules.items()],
         polyhedra_elements=m["polyhedra"], elements=elements,
         wyckoff=wyck, coordination=cn_by_el, density=round(float(conv.density), 4),
-        conventional=cell(conv), primitive=cell(prim), conventional_bonds=bonds, conventional_polyhedra=poly)
+        conventional=cell(conv, site_wyckoff(conv, rules, wyck)), primitive=cell(prim, site_wyckoff(prim, rules, wyck)), conventional_bonds=bonds, conventional_polyhedra=poly)
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True); index = []

@@ -1,13 +1,29 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Crystal Structures — interactive 3D</title><link rel="icon" href="data:,"><link rel="stylesheet" href="./src/style.css"></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Crystal Structures · measured, in 3D</title>
+<meta name="description" content="Thirteen crystal structures from measured COD data, in interactive 3D: unit cells, supercells, Wyckoff sites, coordination polyhedra. English and 中文.">
+<link rel="icon" href="./mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./src/style.css"></head>
 <body>
-<header class="bar"><h1>Crystal Structures</h1>
-  <select id="mat" aria-label="Material"></select>
-  <div class="seg" id="cell"><button data-v="conventional" class="on">Conventional</button><button data-v="primitive">Primitive</button></div>
-  <div class="seg" id="sup"><button data-v="1" class="on">1×</button><button data-v="2">2×</button><button data-v="3">3×</button><button data-v="4">4×</button></div>
-  <label class="chk"><input type="checkbox" id="poly" checked> Polyhedra</label>
-</header>
-<main><div id="view"></div><aside id="info"></aside></main>
+<div class="ground" id="ground" aria-hidden="true"></div>
+<div id="view" aria-label="3D crystal viewer"></div>
+<aside class="rail glass" id="rail">
+  <div class="brand"><svg class="mk" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 28 9.5v13L16 29 4 22.5v-13z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 9.5 16 16l12-6.5M16 16v13" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".45"/><circle cx="16" cy="16" r="3.4" fill="var(--acc)"/></svg>
+    <div><b data-i="brand"></b><em data-i="brandSub"></em></div></div>
+  <nav class="cases" id="cases"></nav>
+  <div class="foot"><div class="lang" id="lang"><button data-l="en">EN</button><button data-l="zh">中文</button></div><span class="src" data-i="sources"></span></div>
+</aside>
+<div class="tools glass" id="tools" role="toolbar">
+  <div class="seg" id="cell"><button data-v="conventional" data-i="conventional"></button><button data-v="primitive" data-i="primitive"></button></div>
+  <div class="seg" id="sup" aria-label="Supercell"><button data-v="1">1×</button><button data-v="2">2×</button><button data-v="3">3×</button><button data-v="4">4×</button></div>
+  <button class="tg" id="poly" aria-pressed="true"><span class="sw"></span><span data-i="polyhedra"></span></button>
+  <button class="tg" id="lab" aria-pressed="false"><span class="sw"></span><span data-i="labels"></span></button>
+  <button class="ic" id="reset" data-t="reset" aria-label="Reset view"><svg viewBox="0 0 20 20"><path d="M4 10a6 6 0 1 0 2-4.5M4 3v3h3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+</div>
+<div class="hint" id="hint" data-i="hint"></div>
+<div class="tip glass" id="tip" hidden></div>
+<section class="panel glass" id="panel"><button class="grab" id="grab" aria-label="Details"><span></span></button><div class="pscroll" id="info"></div></section>
 <script type="module" src="./src/main.js"></script>
 </body></html>
